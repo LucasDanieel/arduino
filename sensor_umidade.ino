@@ -66,11 +66,11 @@ void avisarUsuario() {
   Serial.print(",");
 
   Serial.print("\"umidade_ar\":");
-  Serial.print(umidadeAr);
+  Serial.print(umidadeAr, 0);
   Serial.print(",");
 
   Serial.print("\"temperatura\":");
-  Serial.print(temperatura);
+  Serial.print(temperatura, 0);
   Serial.println("}");
 }
 
@@ -88,11 +88,12 @@ void loop() {
         return;
       }
 
-      avisarUsuario();
-
-      if (umidadeSolo < porcentagemSeco)
+      if (umidadeSolo < porcentagemSeco) {
         avisarNoDisplay();
+        break;
+      }
 
+      avisarUsuario();
       break;
     };
 
@@ -122,11 +123,12 @@ void loop() {
     }
 
     if (contador == 4) {
-      avisarUsuario();
-
-      if (umidadeSolo < porcentagemSeco)
+      if (umidadeSolo < porcentagemSeco) {
         avisarNoDisplay();
-        
+        break;
+      }
+
+      avisarUsuario();
       break;
     };
 
